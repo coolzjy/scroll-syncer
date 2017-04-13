@@ -1,0 +1,23 @@
+{
+  "name": "scroll-syncer",
+  "version": "0.0.0",
+  "description": "Synchronize scoll position among several elements",
+  "main": "index.common.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coolzjy/scroll-syncer.git"
+  },
+  "keywords": [
+    "scroll",
+    "synchronizer"
+  ],
+  "author": "Zhang Visper",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coolzjy/scroll-syncer/issues"
+  },
+  "homepage": "https://github.com/coolzjy/scroll-syncer#readme"
+}

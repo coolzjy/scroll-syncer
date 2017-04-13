@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+      var module = {}
+    </script>
+    <script src="../index.common.js"></script>
+    <script>
+      var ScrollSyncer = module.exports
+    </script>
+    <style>
+      .out {
+        width: 100px;
+        height: 100px;
+        overflow: scroll;
+      }
+
+      .in {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(45deg, blue, white);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="out"><div class="in"></div></div>
+    <div class="out"><div class="in"></div></div>
+    <div class="out"><div class="in"></div></div>
+    <script>
+      var nodes = document.querySelectorAll('.out')
+      var vss = new ScrollSyncer(true, false)
+      vss.on(nodes[0], nodes[1])
+      var hss = new ScrollSyncer(false, true)
+      hss.on(nodes[0], nodes[2])
+    </script>
+  </body>
+</html>
