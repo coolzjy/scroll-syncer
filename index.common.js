@@ -1,3 +1,14 @@
+// detect if user-agent support passive event binding
+var supportPassive = false
+if (window && window.addEventListener && Object.defineProperty) {
+  var options = Object.defineProperty({}, 'passive', {
+    get: function () { supportPassive = true }
+  })
+  window.addEventListener('_detectpassive', null, options)
+}
+
+var bindOptions = supportPassive && { passive: true }
+
 function ScrollSyncer (vertical, horizontal) {
   this._els = []
 
@@ -11,7 +22,7 @@ function ScrollSyncer (vertical, horizontal) {
 
 ScrollSyncer.prototype._on = function (el) {
   if (!el || !el.addEventListener) return
-  el.addEventListener('scroll', this._scrollHandler)
+  el.addEventListener('scroll', this._scrollHandler, bindOptions)
   this._els.push(el)
 }
 
