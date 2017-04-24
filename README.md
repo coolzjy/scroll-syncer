@@ -7,7 +7,8 @@ import ScrollSyncer from 'scroll-syncer'
 
 var ss = new ScrollSyncer(
   true, /* vertical scroll position */
-  true  /* horizontal scroll position */
+  true, /* horizontal scroll position */
+  true  /* use passive event binding */
 )
 
 // Synchronize from el1

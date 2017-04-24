@@ -1,44 +1,33 @@
-// detect if user-agent support passive event binding
-var supportPassive = false
-if (window && window.addEventListener && Object.defineProperty) {
-  var options = Object.defineProperty({}, 'passive', {
-    get: function () { supportPassive = true }
-  })
-  window.addEventListener('_detectpassive', null, options)
-}
-
-var bindOptions = supportPassive
-  ? { passive: true, capture: true }
-  : true
-
-function ScrollSyncer (vertical, horizontal) {
-  this._vertical = vertical
-  this._horizontal = horizontal
+function ScrollSyncer (vertical, horizontal, usePassive) {
   this._from = null
   this._to = []
+  this._bindOptions = usePassive
+    ? { passive: true, capture: true }
+    : true
 
-  this._scrollHandler = this.sync.bind(this)
+  this._sync = (function (e) {
+    var target = e.target
+    this._to.forEach(function (el) {
+      if (vertical) el.scrollTop = target.scrollTop
+      if (horizontal) el.scrollLeft = target.scrollLeft
+    }, this)
+  }).bind(this)
 }
 
 ScrollSyncer.prototype.from = function (target) {
   if (!target || !target.addEventListener) return
   this._from = target
-  this._from.addEventListener('scroll', this._scrollHandler, bindOptions)
-  this.sync()
+  this._from.addEventListener('scroll', this._sync, this._bindOptions)
 }
 
 ScrollSyncer.prototype.to = function (target) {
   if (!target) return
   this._to.push(target)
-  this.sync()
 }
 
 ScrollSyncer.prototype.sync = function () {
   if (this._from) {
-    this._to.forEach(function (el) {
-      if (this._vertical) el.scrollTop = this._from.scrollTop
-      if (this._horizontal) el.scrollLeft = this._from.scrollLeft
-    }, this)
+    this._sync({ target: this._from })
   }
 }
 
