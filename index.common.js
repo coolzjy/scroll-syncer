@@ -2,8 +2,8 @@ function ScrollSyncer (vertical, horizontal, usePassive) {
   this._from = null
   this._to = []
   this._bindOptions = usePassive
-    ? { passive: true, capture: true }
-    : true
+    ? { passive: true }
+    : undefined
 
   this._sync = (function (e) {
     var target = e.target
