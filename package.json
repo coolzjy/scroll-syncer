@@ -1,6 +1,6 @@
 {
   "name": "scroll-syncer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Synchronize scoll position among several elements",
   "main": "index.common.js",
   "scripts": {
