@@ -1,23 +1,20 @@
-function ScrollSyncer (vertical, horizontal, usePassive) {
+function ScrollSyncer (vertical, horizontal) {
   this._from = null
   this._to = []
-  this._bindOptions = usePassive
-    ? { passive: true }
-    : undefined
 
   this._sync = (function (e) {
     var target = e.target
-    this._to.forEach(function (el) {
-      if (vertical) el.scrollTop = target.scrollTop
-      if (horizontal) el.scrollLeft = target.scrollLeft
-    }, this)
+    for (var i = 0; i < this._to.length; i++) {
+      if (vertical) this._to[i].scrollTop = target.scrollTop
+      if (horizontal) this._to[i].scrollTop = target.scrollLeft
+    }
   }).bind(this)
 }
 
 ScrollSyncer.prototype.from = function (target) {
   if (!target || !target.addEventListener) return
   this._from = target
-  this._from.addEventListener('scroll', this._sync, this._bindOptions)
+  this._from.addEventListener('scroll', this._sync)
 }
 
 ScrollSyncer.prototype.to = function (target) {
