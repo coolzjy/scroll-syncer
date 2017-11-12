@@ -6,7 +6,7 @@ function ScrollSyncer (vertical, horizontal) {
     var target = e.target
     for (var i = 0; i < this._to.length; i++) {
       if (vertical) this._to[i].scrollTop = target.scrollTop
-      if (horizontal) this._to[i].scrollTop = target.scrollLeft
+      if (horizontal) this._to[i].scrollLeft = target.scrollLeft
     }
   }).bind(this)
 }
